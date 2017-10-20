@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name" translatable="false">MultiQuiz Pro</string>
+    <string name="question">Question</string>
+    <string name="check">Check</string>
+    <string name="correct">Very Good!!</string>
+    <string name="incorrect">Incorrect...</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="prev">Previous</string>
+    <string name="results">Results</string>
+    <string name="start_over">Start Over</string>
+
+    <array name="all_questions">
+        <item>What is the capital of Catalonia?;Girona;Lleida;*Barcelona;Badalona</item>
+        <item>What is the capital of Valles Occidental?  ;Manresa;*Sabadell;Reus;Sant Cugat</item>
+        <item>What is the capital of Norway?; Madrid;Berlin;Oslo;München</item>
+        <item>What is the capital of the United States?;London;New York;New Hampshire;Washington DC</item>
+    </array>
+
+
+</resources>
