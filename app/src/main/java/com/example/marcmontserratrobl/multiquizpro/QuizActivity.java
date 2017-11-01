@@ -34,13 +34,13 @@ public class QuizActivity extends AppCompatActivity {
     private int[] answer;
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {// ha de tenir només un paràmetre
+    protected void onSaveInstanceState(Bundle outState) {// escriure onSaveInst... i agafar protected void, ha de tenir només un paràmetre
         Log.i("lifecycle","onSaveInstanceState");
         super.onSaveInstanceState(outState);
-        outState.putInt(CORRECT_ANSWER,correct_answer);
-        outState.putInt(CORRECT_QUESTION,current_question);
-        outState.putBooleanArray(ANSWER_IS_CORRECT,answer_is_correct);
-        outState.putIntArray(ANSWER,answer);
+        outState.putInt(CORRECT_ANSWER,correct_answer);//Guardem les dades
+        outState.putInt(CORRECT_QUESTION,current_question); //Guardem les dades
+        outState.putBooleanArray(ANSWER_IS_CORRECT,answer_is_correct);//Guardem les dades
+        outState.putIntArray(ANSWER,answer);//Guardem les dades
 
     }
 
@@ -80,12 +80,12 @@ public class QuizActivity extends AppCompatActivity {
         if (savedInstanceState==null){
             startOver();
         }else {
-            Bundle state= savedInstanceState;
-            correct_answer = state.getInt(CORRECT_ANSWER);
+            Bundle state= savedInstanceState; //creem un bundle per recuperar les dades
+            correct_answer = state.getInt(CORRECT_ANSWER);//anem recuperant els int, arrays... que haviem guardat a dalt
             current_question= state.getInt(CORRECT_QUESTION);
             answer_is_correct= state.getBooleanArray(ANSWER_IS_CORRECT);
             answer= state.getIntArray(ANSWER);
-            showQuestion();
+            showQuestion();//mostrs ara sí la pregunta
         }
 
         //final int correct_answer = getResources().getInteger(R.integer.correct_answer);
@@ -123,7 +123,7 @@ public class QuizActivity extends AppCompatActivity {
         for(int i=0; i<answer.length;i++){
             answer[i]=-1;
         }
-        current_question=0;
+        current_question=0;//torna a la primera pregunta per començar de nou el test
         showQuestion();
     }
 
@@ -131,7 +131,7 @@ public class QuizActivity extends AppCompatActivity {
         int correctas=0, incorrectas=0, nocontestadas=0;
         for (int i = 0; i < all_questions.length; i++){
             if (answer_is_correct[i]) correctas++;
-            else if (answer[i] == -1) nocontestadas++;
+            else if (answer[i] == -1) nocontestadas++; //incrementa les no contestades ja que es queden amb -1
             else incorrectas++;
         }
 
@@ -139,25 +139,25 @@ public class QuizActivity extends AppCompatActivity {
         String message =
                 String.format("Correctas: %d\nIncorrectas: %d\nNo contestadas: %d\n",
                         correctas, incorrectas, nocontestadas);
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
+        AlertDialog.Builder builder= new AlertDialog.Builder(this);// CREAR un creador de quadres de diagles, importar classe de android suport v7, this per a l'acivitat mateix,
         builder.setTitle(R.string.results);
         builder.setMessage(message);
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.finish, new DialogInterface.OnClickListener() {
+        builder.setCancelable(false);// no es pot tornar enrere un cop ha sortit el quadre de dialeg
+        builder.setPositiveButton(R.string.finish, new DialogInterface.OnClickListener() { //CTRL+barra
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
             }
         });
-        builder.setNegativeButton(R.string.start_over, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.start_over, new DialogInterface.OnClickListener() {//CTRL+barra on clicklistener
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //borrar les respostes i tornar a la pregunta 0
-                startOver();
+                startOver();//metode per resetejar la app
 
             }
         });
-        builder.create().show();
+        builder.create().show();//mostra el quadre de dialeg
     }
 
     private void checkAnswer() {
